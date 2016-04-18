@@ -17,7 +17,6 @@ public class ServerNode {
 	private Socket mySock;
 	private ObjectInputStream inputObject;
 	private Message message;
-//	private ObjetcOutputStream outputSream;
 
 	public ServerNode(int port){
 		this.port = port;
