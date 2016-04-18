@@ -8,14 +8,9 @@ public class ClientMain{
 
 	public static void main(String[] args){
 
-	ClientNode client = new ClientNode("192.168.0.18",9999);
-//	DataOutputStream outputData = new DataOutputStream(client.getOutputStream());
-//	try{
-//	outputData.writeUTF("Hola álvaro");
-//	outputData.close();
-//	} catch (IOException e){
-//		e.printStackTrace();
-//	}
-//	client.close();
+	ClientNode client = new ClientNode("localhost",12345);
+	Message message = new Message("Hola Álvaro...","2ndo: espero estés bien." );
+	client.sendMessage(message);
+	client.close();
 	}
 }

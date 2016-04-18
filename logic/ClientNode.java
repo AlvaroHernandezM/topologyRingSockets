@@ -13,6 +13,7 @@ public class ClientNode {
 	private String host;
 	private Socket clientSocket;
 	private InetAddress ipClientSocket;
+	private ObjectOutputStream outputObject;
 
 	public ClientNode(String host, int port){
 		this.host = host;
@@ -24,6 +25,7 @@ public class ClientNode {
 	private void connect(){
 		try {
 			this.clientSocket = new Socket(this.host, this.port);
+			this.outputObject = new ObjectOutputStream(this.clientSocket.getOutputStream());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -57,5 +59,14 @@ public class ClientNode {
 	public InetAddress getIpMySock(){
 		this.ipClientSocket = this.clientSocket.getInetAddress();
 		return this.ipClientSocket;
+	}
+
+	public void sendMessage(Message message){
+		try{
+		this.outputObject.writeObject(message);
+		this.outputObject.close();
+		} catch (IOException e){
+			System.out.println(e.getMessage());
+		}
 	}
 }

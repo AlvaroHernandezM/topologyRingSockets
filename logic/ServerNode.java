@@ -2,6 +2,7 @@
 
 package logic;
 
+import logic.*;
 import java.net.*;
 import java.io.*;
 //import java.net.InetAddress.*;
@@ -14,23 +15,24 @@ public class ServerNode {
 	private InetAddress ipMySock; //Ip del socket que acepta una petición (deberia ser del cliente)
 	private ServerSocket serverSocket;
 	private Socket mySock;
+	private ObjectInputStream inputObject;
+	private Message message;
+//	private ObjetcOutputStream outputSream;
 
 	public ServerNode(int port){
 		this.port = port;
 		this.ipAddress = null;
 		this.ipMySock = null;
+		this.serverSocket = null;
+		this.mySock = null;
 		this.create();
 	}
 
 	private void create(){
 		try {
 			this.serverSocket = new ServerSocket(this.port);
+//			this.outputData = this.mySock.getOutputStream();
 			System.out.println("Creado satisfactoriamente el servidor en el puerto: "+this.serverSocket.getLocalPort());
-			System.out.println(this.serverSocket.getInetAddress());
-			System.out.println(this.serverSocket.isClosed());
-//			this.serverSocket.close();
-//			System.out.println(this.serverSocket.isClosed());
-
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -38,19 +40,28 @@ public class ServerNode {
 
 	public void accept(){
 		try{
-		System.out.println(this.serverSocket.isClosed());
-		if(! this.serverSocket.isClosed()){
 		this.mySock = this.serverSocket.accept();
-		}
+		this.inputObject = new ObjectInputStream(this.mySock.getInputStream());
 		System.out.println("Conexión exitosa");
 		} catch (IOException e){
 			System.out.println("aqui es:"+e.getMessage());
 		}
 	}
 
+	public Message readMessage(){
+		try{
+		this.message = (Message) this.inputObject.readObject();
+		this.inputObject.close(); //Cerrando la lectura
+		return message;
+		} catch (Exception e) {
+		System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
 	public void close(){
 		try{
-		this.serverSocket.close();
+		this.mySock.close();
 		} catch (IOException e){
 			System.out.println(e.getMessage());
 		}
@@ -69,23 +80,5 @@ public class ServerNode {
 	public InetAddress getIpMySock(){
 		this.ipMySock = this.mySock.getInetAddress();
 		return this.ipMySock;
-	}
-
-	public InputStream getInputStream(){
-		try{
-		return this.mySock.getInputStream();
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
-
-	public OutputStream getOutputStream(){
-		try {
-		return this.mySock.getOutputStream();
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
-		return null;
 	}
 }

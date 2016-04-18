@@ -8,17 +8,13 @@ public class ServerMain{
 
 	public static void main(String[] args){
 
-		ServerNode server = new ServerNode(9999);
+		ServerNode server = new ServerNode(12345);
 		while(true){
-			System.out.println("Escuchando");
+//			System.out.println("Escuchando");
 			server.accept();
-			//DataInputStream inputData = new DataInputStream(server.getInputStream());
-//			try{
-//			String message = inputData.readUTF();
-//			System.out.println("El mmensaje desde "+server.getIpMySock()+" fue enviado a: "+server.getIpAddress()+" es: "+message);
-//			} catch (IOException e){
-//				System.out.println(e.getMessage());
-//			}
+			Message message = server.readMessage();
+			System.out.println("El mensaje 1 es: "+message.getMessage1());
+			System.out.println("El mensaje 2 es: "+message.getMessage2());
 			server.close();
 		}
 	}
