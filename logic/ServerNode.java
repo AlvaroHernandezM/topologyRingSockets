@@ -39,23 +39,32 @@ public class ServerNode {
 
 	public void accept(){
 		try{
+		System.out.println("Escuchando");
 		this.mySock = this.serverSocket.accept();
 		this.inputObject = new ObjectInputStream(this.mySock.getInputStream());
 		System.out.println("Conexión exitosa");
 		} catch (IOException e){
-			System.out.println("aqui es:"+e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
 	public Message readMessage(){
 		try{
 		this.message = (Message) this.inputObject.readObject();
-		this.inputObject.close(); //Cerrando la lectura
-		return message;
+		//this.inputObject.close(); //Cerrando la lectura
+		return this.message;
 		} catch (Exception e) {
 		System.out.println(e.getMessage());
 		}
 		return null;
+	}
+
+	public void closeInputObject(){
+		try{
+		this.inputObject.close();
+		} catch (IOException e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void close(){

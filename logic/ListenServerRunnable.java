@@ -10,23 +10,30 @@ public class ListenServerRunnable implements Runnable{
 
 	public ListenServerRunnable(ServerNode server){
 		this.server = server;
-		this.flag = true;
+		this.flag = true; //abierto a recibir mensajes
 	}
 
 	public void setFlag(boolean flag){
 		this.flag = flag;
 	}
 
+	public boolean getFlag(){
+		return this.flag;
+	}
+
 	@Override
 	public void run(){
-	System.out.println("Escuchando");
 	this.server.accept();
+	System.out.println("Se ha establecido una conexión con "+this.server.getIpMySock());
+	int cont = 0;
 	while(flag){
-		System.out.println("Se ha establecido una conexión con "+this.server.getIpMySock());
 		Message message = this.server.readMessage();
-		System.out.println("El mensaje uno es: "+message.getMessage1());
-		System.out.println("El mensaje dos es: "+message.getMessage2());
+		cont += 1;
+		System.out.println("El mensaje "+cont+".1 es: "+message.getMessage1());
+		System.out.println("El mensaje "+cont+".2 es: "+message.getMessage2());
+		
 	}
+	this.server.closeInputObject();
 	this.server.close();
 	}
 }

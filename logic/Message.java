@@ -11,6 +11,11 @@ public class Message implements Serializable{
 		this.message2 = message2;
 	}
 
+	public Message(String message1){
+		this.message1 = message1;
+		this.message2 = "No tengo nada :( ";
+	}
+
 	public String getMessage1(){
 		return this.message1;
 	}
