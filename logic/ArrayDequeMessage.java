@@ -29,4 +29,8 @@ public class ArrayDequeMessage{
 		return this.deque.size();
 	}
 
+	public boolean isEmpty(){
+		return this.deque.isEmpty();
+	}
+
 }

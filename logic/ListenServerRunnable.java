@@ -29,9 +29,8 @@ public class ListenServerRunnable implements Runnable{
 	while(flag){
 		Message message = this.server.readMessage();
 		cont += 1;
-		System.out.println("El mensaje "+cont+".1 es: "+message.getMessage1());
-		System.out.println("El mensaje "+cont+".2 es: "+message.getMessage2());
-		
+//		System.out.println("El mensaje "+cont+".1 es: "+message.getMessage1());
+//		System.out.println("El mensaje "+cont+".2 es: "+message.getMessage2());
 	}
 	this.server.closeInputObject();
 	this.server.close();

@@ -13,8 +13,8 @@ public class ServerMain{
 //			System.out.println("Escuchando");
 			server.accept();
 			Message message = server.readMessage();
-			System.out.println("El mensaje 1 es: "+message.getMessage1());
-			System.out.println("El mensaje 2 es: "+message.getMessage2());
+//			System.out.println("El mensaje 1 es: "+message.getMessage1());
+//			System.out.println("El mensaje 2 es: "+message.getMessage2());
 			server.close();
 		}
 	}

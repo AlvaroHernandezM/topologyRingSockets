@@ -1,32 +1,52 @@
 package logic;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.net.*;
+import java.lang.*;
+import java.util.*;
 
 public class Message implements Serializable{
 
-	private String message1;
-	private String message2;
+	private String message;
+	private String hour;
+	private String myIp;
+	private InetAddress address;
 
-	public Message(String message1, String message2){
-		this.message1 = message1;
-		this.message2 = message2;
-	}
-
-	public Message(String message1){
-		this.message1 = message1;
-		this.message2 = "No tengo nada :( ";
-	}
-
-	public String getMessage1(){
-		return this.message1;
-	}
-	public String getMessage2(){
-		return this.message2;
+	public Message(){
+		this.message = this.generateString();
+		this.hour = this.getValueHour();
+		this.myIp = this.getIp();
+		this.address = null;
 	}
 
-	public void setMessage1(String message1){
-		this.message1 = message1;
+	private String getValueHour(){
+		Calendar cal = Calendar.getInstance();
+		cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		return sdf.format(cal.getTime()).toString();
 	}
-	public void setMessage2(String message2){
-		this.message2 = message2;
+
+	private String generateString(){
+		RandomString randomString = new RandomString();
+		return randomString.getRandomString();
+	}
+
+	private String getIp(){
+		try{
+                this.address = InetAddress.getLocalHost();
+                } catch (UnknownHostException e){
+                        System.out.println(e.getMessage());
+                }
+                return address.getHostAddress();
+	}
+
+	public String getMessage(){
+		return this.message;
+	}
+	public String getHour(){
+		return this.hour;
+	}
+	public String getMyIp(){
+		return this.myIp;
 	}
 }

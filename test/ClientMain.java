@@ -9,7 +9,8 @@ public class ClientMain{
 	public static void main(String[] args){
 
 	ClientNode client = new ClientNode("localhost",12345);
-	Message message = new Message("Hola Álvaro...","2ndo: espero estés bien." );
+//	Message message = new Message("Hola Álvaro...","2ndo: espero estés bien." );
+	Message message = new Message();
 	client.sendMessage(message);
 	client.close();
 	}
