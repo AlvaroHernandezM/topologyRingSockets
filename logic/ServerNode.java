@@ -17,6 +17,7 @@ public class ServerNode {
 	private Socket mySock;
 	private ObjectInputStream inputObject;
 	private Message message;
+	private ArrayDequeMessage arrayDequeMessage;
 
 	public ServerNode(int port){
 		this.port = port;
@@ -24,13 +25,13 @@ public class ServerNode {
 		this.ipMySock = null;
 		this.serverSocket = null;
 		this.mySock = null;
+		this.arrayDequeMessage = new ArrayDequeMessage();
 		this.create();
 	}
 
 	private void create(){
 		try {
 			this.serverSocket = new ServerSocket(this.port);
-//			this.outputData = this.mySock.getOutputStream();
 			System.out.println("Creado satisfactoriamente el servidor en el puerto: "+this.serverSocket.getLocalPort());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -48,15 +49,30 @@ public class ServerNode {
 		}
 	}
 
-	public Message readMessage(){
+	public boolean addMessage(Message message){
+		return	this.arrayDequeMessage.addMessage(message);
+	}
+
+	public Message getMessageArrayDeque(){
+		return this.arrayDequeMessage.getMessage();
+	}
+
+	public boolean isEmptyArrayDeque(){
+		return this.arrayDequeMessage.isEmpty();
+	}
+
+	public int getSizeArrayDeque(){
+		return this.arrayDequeMessage.getSize();
+	}
+
+	public boolean readMessage(){
 		try{
 		this.message = (Message) this.inputObject.readObject();
-		//this.inputObject.close(); //Cerrando la lectura
-		return this.message;
+		return this.arrayDequeMessage.addMessage(this.message);
 		} catch (Exception e) {
 		System.out.println(e.getMessage());
 		}
-		return null;
+		return false;
 	}
 
 	public void closeInputObject(){

@@ -43,10 +43,16 @@ public class Message implements Serializable{
 	public String getMessage(){
 		return this.message;
 	}
+
 	public String getHour(){
 		return this.hour;
 	}
+
 	public String getMyIp(){
 		return this.myIp;
+	}
+
+	public String getMessageAll(){
+		return  "Mensaje: "+this.message+". Hora: "+this.hour+". IP: "+this.myIp;
 	}
 }

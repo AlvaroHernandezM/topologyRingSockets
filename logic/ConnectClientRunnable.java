@@ -9,9 +9,8 @@ public class ConnectClientRunnable implements Runnable{
 	private ClientNode client;
 	private int portConnect;
 	private String hostConnect;
-	private boolean flag;
+	private boolean flag; //bandera de conexión
 	private boolean sendMessage;
-	private boolean reply;
 	private Message message;
 
 	public ConnectClientRunnable(String hostConnect, int portConnect){
@@ -19,21 +18,11 @@ public class ConnectClientRunnable implements Runnable{
 		this.portConnect = portConnect;
 		this.flag = false;
 		this.sendMessage = false;
-		this.reply = false;
 	}
 
-	private void sendMessage(Message message){
+	public void sendMessage(Message message){
 		this.message = message;
 		this.sendMessage = true;
-	}
-
-	public void sendReply(Message message){
-		this.message = message;
-		this.reply = true;
-	}
-
-	public void setReply(boolean reply){
-		this.reply = reply;
 	}
 
 	public void setFlag(boolean flag){
@@ -60,15 +49,6 @@ public class ConnectClientRunnable implements Runnable{
 //			}
 			this.client.sendMessage(this.message);
 			this.sendMessage=false;
-		}
-		if(this.reply){
-//			try{
-//				Thread.sleep(7000);
-//			} catch (InterruptedException e){
-//				System.out.println(e.getMessage());
-//			}
-			this.client.sendMessage(this.message);
-			this.reply=false;
 		}
 	}
 	this.client.closeOutputObject();
