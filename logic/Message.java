@@ -1,5 +1,5 @@
 package logic;
-import java.io.Serializable;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.net.*;
 import java.lang.*;
@@ -11,6 +11,7 @@ public class Message implements Serializable{
 	private String hour;
 	private String myIp;
 	private InetAddress address;
+	private URL url;
 
 	public Message(){
 		this.message = this.generateString();
@@ -32,12 +33,29 @@ public class Message implements Serializable{
 	}
 
 	private String getIp(){
-		try{
-                this.address = InetAddress.getLocalHost();
-                } catch (UnknownHostException e){
-                        System.out.println(e.getMessage());
-                }
-                return address.getHostAddress();
+		try {
+		    	Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+		   	 while (interfaces.hasMoreElements()) {
+		        NetworkInterface iface = interfaces.nextElement();
+		        if (iface.isLoopback() || !iface.isUp() || iface.isVirtual() || iface.isPointToPoint())
+		         continue;
+		     	 Enumeration<InetAddress> addresses = iface.getInetAddresses();
+		       	 while(addresses.hasMoreElements()) {
+		            InetAddress addr = addresses.nextElement();
+	        	    String ip = addr.getHostAddress();
+	        	    if(Inet4Address.class == addr.getClass()) return ip;
+		       	 }
+    			}
+		} catch (SocketException e) {
+	    		throw new RuntimeException(e);
+		}
+		return null;
+//		try{
+//                this.address = InetAddress.getLocalHost();
+//                } catch (UnknownHostException e){
+//                        System.out.println(e.getMessage());
+//                }
+//                return address.getHostAddress();
 	}
 
 	public String getMessage(){

@@ -24,6 +24,7 @@ public class Node implements Runnable{
 	private Thread myThread;
 	private boolean flag;
 	private boolean isServerData; //true es un servidor de datos false, es un nodo de recibir y replicar
+	private ManagerFile managerFile;
 
 	public Node(int portListen, int portConnect, String hostConnect, boolean isServerData){
 		this.portListen = portListen;
@@ -55,7 +56,8 @@ public class Node implements Runnable{
 	}
 
 	private void showInformation(){
-		this.showInformationRunnable = new ShowInformationRunnable();
+		this.managerFile = new ManagerFile();
+		this.showInformationRunnable = new ShowInformationRunnable(this.managerFile);
 		this.showInformationThread = new Thread(this.showInformationRunnable);
 		this.showInformationThread.start();
 	}
@@ -120,6 +122,8 @@ public class Node implements Runnable{
 					for(int i=0; i<this.server.getSizeArrayDeque(); i++){
 						if(this.isServerData){
 							//esribir en el archivo de texto
+							System.out.println("El hilo del servidor de datos ha escrito un valor al .txt");
+							this.managerFile.writeFile(this.server.getMessageArrayDeque());
 						} else {
 							System.out.println("Estoy enviando un mensaje desde el hilo del nodo");
 							this.sendMessage(this.server.getMessageArrayDeque());

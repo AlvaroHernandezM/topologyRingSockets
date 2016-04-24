@@ -4,6 +4,7 @@ import java.io.*;
 
 public class ManagerFile{
 
+
 	private String urlFile;
 	private BufferedWriter fileOut;
 	private BufferedReader fileIn;
@@ -14,45 +15,20 @@ public class ManagerFile{
 		this.fileIn = null;
 	}
 
-	public void createWrite(){
-		try{
-		this.fileOut = new BufferedWriter(new FileWriter(new File(this.urlFile)));
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
-	}
-
 	public void writeFile(Message message){
 		try{
+			this.fileOut = new BufferedWriter(new FileWriter(new File(this.urlFile), true));
 			this.fileOut.write(message.getMyIp()+";"+message.getMessage()+";"+message.getHour());
 			this.fileOut.newLine();
+			this.fileOut.close();
 		} catch (IOException e){
 			System.out.println(e.getMessage());
-		}
-	}
-
-	public void closeWrite(){
-		try{
-		this.fileOut.close();
-		} catch (IOException e){
-			e.getMessage();
-		}
-	}
-
-	public void createRead(){
-		if(! (new File(this.urlFile)).exists() ){
-			System.out.println("No se ha encontrado el fichero");
-		} else {
-			try{
-			this.fileIn = new BufferedReader(new FileReader(new File(this.urlFile)));
-			} catch (IOException e){
-				System.out.println(e.getMessage());
-			}
 		}
 	}
 
 	public void readFile(String host){
 		try{
+			this.fileIn = new BufferedReader(new FileReader(new File(this.urlFile)));
 			String line = null;
 			while((line = this.fileIn.readLine()) != null){
 				String[] temp;
@@ -66,5 +42,4 @@ public class ManagerFile{
 			System.out.println(e.getMessage());
 		}
 	}
-
 }
