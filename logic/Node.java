@@ -122,10 +122,10 @@ public class Node implements Runnable{
 					for(int i=0; i<this.server.getSizeArrayDeque(); i++){
 						if(this.isServerData){
 							//esribir en el archivo de texto
-							System.out.println("El hilo del servidor de datos ha escrito un valor al .txt");
+//							System.out.println("El hilo del servidor de datos ha escrito un valor al .txt");
 							this.managerFile.writeFile(this.server.getMessageArrayDeque());
 						} else {
-							System.out.println("Estoy enviando un mensaje desde el hilo del nodo");
+//							System.out.println("Estoy enviando un mensaje desde el hilo del nodo");
 							this.sendMessage(this.server.getMessageArrayDeque());
 						}
 					}

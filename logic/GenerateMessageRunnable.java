@@ -33,9 +33,9 @@ public class GenerateMessageRunnable implements Runnable{
 			}
 			this.message = new Message();
 			if(this.server.addMessage(this.message)){
-				System.out.println("Mensaje agregado a la cola desde el generador");
+//				System.out.println("Mensaje agregado a la cola desde el generador");
 			} else {
-				System.out.println("Error al agregar a la cola desde el generador");
+//				System.out.println("Error al agregar a la cola desde el generador");
 			}
 		}
 	}

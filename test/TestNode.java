@@ -54,14 +54,14 @@ public static void main(String[] args){
 	}
 
 	if(Integer.parseInt(args[0]) == 4){
-		Node node3 = new Node(6776, 6776, "192.168.0.26", true);
+		Node node4 = new Node(6776, 6776, "192.168.0.26", true);
 		while(true){
-			if(node3.isListenServer() && node3.isConnectClient()){
-			node3.setFlag(true);
-			node3.runShowInformation("127.0.1.1");
+			if(node4.isListenServer() && node4.isConnectClient()){
+			node4.setFlag(true);
+			node4.runShowInformation("192.168.0.26");
 			} else {
-				node3.setFlag(false);
-				node3.stopShowInformation();
+				node4.setFlag(false);
+				node4.stopShowInformation();
 			}
 		}
 

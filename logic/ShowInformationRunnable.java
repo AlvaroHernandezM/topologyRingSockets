@@ -36,7 +36,7 @@ public class ShowInformationRunnable implements Runnable{
 	while(true){
 		while(this.flag){
 			try{
-				Thread.sleep(7000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}

@@ -27,19 +27,25 @@ public class ManagerFile{
 	}
 
 	public void readFile(String host){
-		try{
-			this.fileIn = new BufferedReader(new FileReader(new File(this.urlFile)));
-			String line = null;
-			while((line = this.fileIn.readLine()) != null){
-				String[] temp;
-				temp = line.split(";", 3);
-				if(host.equals(temp[0])){
-					System.out.println("Mensaje: "+temp[1]+" - Hora: "+temp[2]);
+		File file = new File(this.urlFile);
+		if(file.exists()){
+			try{
+				this.fileIn = new BufferedReader(new FileReader(new File(this.urlFile)));
+				String line = null;
+				System.out.println("********* INFORMACIÓN DE IP: "+host+" ***********");
+				while((line = this.fileIn.readLine()) != null){
+					String[] temp;
+					temp = line.split(";", 3);
+					if(host.equals(temp[0])){
+						System.out.println("Mensaje: "+temp[1]+" - Hora: "+temp[2]);
+					}
 				}
+				this.fileIn.close();
+			} catch (IOException e){
+				System.out.println(e.getMessage());
 			}
-			this.fileIn.close();
-		} catch (IOException e){
-			System.out.println(e.getMessage());
+		} else {
+			System.out.println("El .txt de "+host+" aún no se ha creado");
 		}
 	}
 }

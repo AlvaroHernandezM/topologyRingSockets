@@ -32,7 +32,7 @@ public class ServerNode {
 	private void create(){
 		try {
 			this.serverSocket = new ServerSocket(this.port);
-			System.out.println("Creado satisfactoriamente el servidor en el puerto: "+this.serverSocket.getLocalPort());
+//			System.out.println("Creado satisfactoriamente el servidor en el puerto: "+this.serverSocket.getLocalPort());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -43,7 +43,7 @@ public class ServerNode {
 		System.out.println("Escuchando");
 		this.mySock = this.serverSocket.accept();
 		this.inputObject = new ObjectInputStream(this.mySock.getInputStream());
-		System.out.println("Conexión exitosa");
+//		System.out.println("Conexión exitosa");
 		} catch (IOException e){
 			System.out.println(e.getMessage());
 		}

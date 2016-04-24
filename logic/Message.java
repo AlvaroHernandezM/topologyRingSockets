@@ -50,12 +50,6 @@ public class Message implements Serializable{
 	    		throw new RuntimeException(e);
 		}
 		return null;
-//		try{
-//                this.address = InetAddress.getLocalHost();
-//                } catch (UnknownHostException e){
-//                        System.out.println(e.getMessage());
-//                }
-//                return address.getHostAddress();
 	}
 
 	public String getMessage(){

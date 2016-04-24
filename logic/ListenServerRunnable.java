@@ -30,7 +30,7 @@ public class ListenServerRunnable implements Runnable{
 	while(flag){
 		if(this.server.readMessage()){
 			cont += 1;
-			System.out.println("Mensaje "+cont+" leido y guardado en la cola del servidor");
+//			System.out.println("Mensaje "+cont+" leido y guardado en la cola del servidor");
 		} else {
 
 		}
