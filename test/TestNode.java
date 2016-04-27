@@ -22,7 +22,7 @@ public static void main(String[] args){
 //		node1.connectClient();
 	}
 	if(Integer.parseInt(args[0]) == 2){
-		Node node2 = new Node(6776, 6776, "192.168.0.29", false);
+		Node node2 = new Node(6776, 6776, "192.168.0.16", false);
 		while(true){
 			if(node2.isListenServer() && node2.isConnectClient()){
 			node2.setFlag(true);
@@ -38,7 +38,7 @@ public static void main(String[] args){
 	}
 
 	if(Integer.parseInt(args[0]) == 3){
-		Node node3 = new Node(6776, 6776, "192.168.0.21", false);
+		Node node3 = new Node(6776, 6776, "192.168.0.21",false);
 		while(true){
 			if(node3.isListenServer() && node3.isConnectClient()){
 			node3.setFlag(true);
@@ -54,11 +54,11 @@ public static void main(String[] args){
 	}
 
 	if(Integer.parseInt(args[0]) == 4){
-		Node node4 = new Node(6776, 6776, "192.168.0.26", true);
+		Node node4 = new Node(6776, 6776, "192.168.0.25", true);
 		while(true){
 			if(node4.isListenServer() && node4.isConnectClient()){
 			node4.setFlag(true);
-			node4.runShowInformation("192.168.0.26");
+			node4.runShowInformation("192.168.0.27");
 			} else {
 				node4.setFlag(false);
 				node4.stopShowInformation();

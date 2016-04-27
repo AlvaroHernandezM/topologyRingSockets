@@ -40,7 +40,7 @@ public class ShowInformationRunnable implements Runnable{
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}
-			managerFile.readFile(this.hostRead);
+				managerFile.readFile(this.hostRead);
 //			this.message = new Message();
 			//leer información desde el archivo de texto en un host especifico
 		}

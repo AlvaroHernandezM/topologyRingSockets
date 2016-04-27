@@ -25,6 +25,7 @@ public class Node implements Runnable{
 	private boolean flag;
 	private boolean isServerData; //true es un servidor de datos false, es un nodo de recibir y replicar
 	private ManagerFile managerFile;
+	private String urlFile;
 
 	public Node(int portListen, int portConnect, String hostConnect, boolean isServerData){
 		this.portListen = portListen;
@@ -36,6 +37,7 @@ public class Node implements Runnable{
 		this.connectClient();
 		if(this.isServerData){
 			this.showInformation();
+			this.urlFile = "serverData.txt";
 		}else{
 			this.generateMessage();
 		}
@@ -56,7 +58,7 @@ public class Node implements Runnable{
 	}
 
 	private void showInformation(){
-		this.managerFile = new ManagerFile();
+		this.managerFile = new ManagerFile(this.urlFile);
 		this.showInformationRunnable = new ShowInformationRunnable(this.managerFile);
 		this.showInformationThread = new Thread(this.showInformationRunnable);
 		this.showInformationThread.start();
