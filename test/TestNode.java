@@ -1,7 +1,7 @@
 package test;
 
 import logic.*;
-import java.lang.Integer.*;
+import java.lang.*;
 
 public class TestNode{
 
@@ -9,10 +9,29 @@ public static void main(String[] args){
 
 	if(Integer.parseInt(args[0]) == 1){
 		Node node1 = new Node(6776, 6776, "192.168.0.27", false);
+//		RunShell runShell = new RunShell();
 		while(true){
 			if(node1.isListenServer() && node1.isConnectClient()){
 			node1.setFlag(true);
 			node1.runGenerateMessage();
+			try{
+				Thread.sleep(10000);
+			} catch (InterruptedException e){
+				System.out.println(e.getMessage());
+			}
+			String host = "192.168.0.21";
+            		String user = "arhm-server-4";
+	        	 String password = "cc1052407351";
+		         String command = "cd testJava/topologyRingWithSockets/; cat serverData.txt";
+			ConexionSSH conexion = new ConexionSSH(host,user,password, command);
+//			String[] aux = new String[200];
+//			aux = runShell.getInformation("192.168.0.27","192.168.0.21");
+//			int size = aux.length;
+//			for(int i=0; i<size; i++){
+//	       			 if(aux[i] != null){
+//                	       	 System.out.println(aux[i]);
+//       	               		 }
+//	                }
 			} else {
 				node1.setFlag(false);
 				node1.stopGenerateMessage();
@@ -55,13 +74,27 @@ public static void main(String[] args){
 
 	if(Integer.parseInt(args[0]) == 4){
 		Node node4 = new Node(6776, 6776, "192.168.0.25", true);
+//		RunShell runShell = new RunShell();
 		while(true){
 			if(node4.isListenServer() && node4.isConnectClient()){
 			node4.setFlag(true);
-			node4.runShowInformation("192.168.0.27");
+//			try{
+//				Thread.sleep(10000);
+//			} catch (InterruptedException e){
+//				System.out.println(e.getMessage());
+//			}
+//			String[] aux = new String[200];
+//			aux = runShell.getInformation("192.168.0.27");
+//			int size = aux.length;
+//			for(int i=0; i<size; i++){
+//                       		 if(aux[i] != null){
+//                	        System.out.println(aux[i]);
+//        	                }
+//	                }
+//			node4.runShowInformation("192.168.0.27");
 			} else {
 				node4.setFlag(false);
-				node4.stopShowInformation();
+//				node4.stopShowInformation();
 			}
 		}
 

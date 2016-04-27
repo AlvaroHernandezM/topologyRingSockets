@@ -18,8 +18,6 @@ public class Node implements Runnable{
 	private ConnectClientRunnable connectClientRunnable;
 	private Thread generateMessageThread;
 	private GenerateMessageRunnable generateMessageRunnable;
-	private Thread showInformationThread;
-	private ShowInformationRunnable showInformationRunnable;
 	private ServerNode server;
 	private Thread myThread;
 	private boolean flag;
@@ -36,8 +34,8 @@ public class Node implements Runnable{
 		this.listenServer();
 		this.connectClient();
 		if(this.isServerData){
-			this.showInformation();
 			this.urlFile = "serverData.txt";
+			this.managerFile = new ManagerFile(this.urlFile);
 		}else{
 			this.generateMessage();
 		}
@@ -57,13 +55,6 @@ public class Node implements Runnable{
 		this.connectClientThread.start();
 	}
 
-	private void showInformation(){
-		this.managerFile = new ManagerFile(this.urlFile);
-		this.showInformationRunnable = new ShowInformationRunnable(this.managerFile);
-		this.showInformationThread = new Thread(this.showInformationRunnable);
-		this.showInformationThread.start();
-	}
-
 	private void generateMessage(){
 		this.generateMessageRunnable = new GenerateMessageRunnable(this.server);
 		this.generateMessageThread = new Thread(this.generateMessageRunnable);
@@ -80,20 +71,8 @@ public class Node implements Runnable{
 		this.flag = flag;
 	}
 
-	public void runShowInformation(String host){
-		this.showInformationRunnable.setFlag(true, host);
-	}
-
 	public void runGenerateMessage(){
 		this.generateMessageRunnable.setFlag(true);
-	}
-
-	public void stopShowInformation(){
-		this.showInformationRunnable.setFlag(false);
-	}
-
-	public void changeNodeShowInformation(String host){
-		this.showInformationRunnable.setHost(host);
 	}
 
 	public void stopGenerateMessage(){
