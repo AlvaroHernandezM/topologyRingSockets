@@ -1,3 +1,5 @@
 javac logic/*.java
-javac test/TestNode.java
+javac main/*.java
+javac presentation/*.java
+javac test/TestJFrameApp.java
 

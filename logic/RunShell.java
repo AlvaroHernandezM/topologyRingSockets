@@ -64,6 +64,7 @@ public class RunShell {
 		return messages;
 	}
 
+	/*
 	public String[] getInformation(String host, String hostServerData){
 		System.out.println("Ya entre");
 		this.runProcess("ssh arhm-server-4@192.168.0.21");
@@ -86,5 +87,5 @@ public class RunShell {
                         }
                 }
 		return messages;
-	}
+	}*/
 }
