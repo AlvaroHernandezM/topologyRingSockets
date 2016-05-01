@@ -25,7 +25,11 @@ public class ActionListenerApp implements ActionListener{
     		switch(commandCase){
     			case COMMAND_ACCEPT_CONFIGURATION:
                 this.configurationTopology.setVisible(false);
-                this.jFrameApp.addJPanelShowInformation(this.configurationTopology.getHostNode1(), this.configurationTopology.getHostNode2(), this.configurationTopology.getHostNode3(), this.configurationTopology.getHostNode4());
+                this.jFrameApp.addJPanelShowInformation(this.configurationTopology.getHostNode1(), this.configurationTopology.getUserNode1(),
+                 this.configurationTopology.getHostNode2(), this.configurationTopology.getUserNode2(),
+                  this.configurationTopology.getHostNode3(), this.configurationTopology.getUserNode3(),
+                   this.configurationTopology.getHostNode4(), this.configurationTopology.getUserNode4(),
+                    this.configurationTopology.getServerData());
                 /*
                     Message myIp = new Message();
     				boolean isNode1 = myIp.getMyIp().equals(this.configurationTopology.getHostNode1());

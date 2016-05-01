@@ -20,11 +20,11 @@ public class RunShell implements Runnable{
 		
 		//Ejectura un commando y espera que haya resultado bien
 		try{
-		System.out.println("Se va a ejectura el proceso"+this.command);
+		//System.out.println("Se va a ejectura el proceso"+this.command);
 		this.p = Runtime.getRuntime().exec(this.command);
-		System.out.println("esperando por el comando");
+//		System.out.println("esperando por el comando");
 		this.p.waitFor();
-		System.out.println("ya lo pase");
+//		System.out.println("ya lo pase");
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 		}

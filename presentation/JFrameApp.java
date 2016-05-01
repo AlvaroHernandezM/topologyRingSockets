@@ -31,8 +31,8 @@ public class JFrameApp extends JFrame{
 		this.setVisible(true);
 	}
 
-	public void addJPanelShowInformation(String host1, String host2, String host3, String host4){
-		this.showInformation = new JPanelShowInformation(host1,host2,host3,host4);
+	public void addJPanelShowInformation(String host1,String user1, String host2,String user2, String host3,String user3, String host4,String user4, String serverData){
+		this.showInformation = new JPanelShowInformation(host1,user1,host2,user2,host3,user3,host4,user4,serverData);
 		Thread thread = new Thread(this.showInformation);
 		thread.start();
 		this.add(this.showInformation, BorderLayout.CENTER);

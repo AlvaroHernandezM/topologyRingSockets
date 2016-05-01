@@ -1,5 +1,6 @@
 package presentation;
 
+import logic.*;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -16,17 +17,26 @@ public class JPanelShowInformation extends JPanel implements Runnable{
 
 	private JPanel jPanelConfigurationNode;
 	private JPanelJComboBox jPanelJComboBoxNodeShow;
-	private String host1,host2,host3,host4;
+	private String host1,user1,host2,user2,host3,user3,host4,user4,serverData;
 	private JTextArea txtArea;
 	private JScrollPane scrollPane;
 	private JSpinner spinner;
+	private Message myIp;
+	private RunShell runShell;
 
-	public JPanelShowInformation(String host1, String host2, String host3, String host4){
+	public JPanelShowInformation(String host1,String user1, String host2,String user2, String host3,String user3, String host4,String user4, String serverData){
 	super();
+	this.myIp = new Message();
 	this.host1 = host1;
 	this.host2 = host2;
 	this.host3 = host3;
 	this.host4 = host4;
+	this.user1 = user1;
+	this.user2 = user2;
+	this.user3 = user3;
+	this.user4 = user4;	
+	this.serverData = serverData;
+
 	this.jPanelConfigurationNode = new JPanel();
 	this.jPanelConfigurationNode.setOpaque(false);
 	this.jPanelConfigurationNode.setSize(900, 700);
@@ -52,27 +62,13 @@ public class JPanelShowInformation extends JPanel implements Runnable{
 
     this.add(this.jPanelConfigurationNode);
 	}
-
-	public String getHostNode1(){
-		return this.host1;
-	}
-	public String getHostNode2(){
-		return this.host2;
-	}
-	public String getHostNode3(){
-		return this.host3;
-	}
-	public String getHostNode4(){
-		return this.host4;
-	}
 	public String getNodeShow(){
 		String command =this.jPanelJComboBoxNodeShow.getValue();
 		switch(command){
 			case "1":
 				return this.host1;
 			case "2":
-				return this.host2;
-			
+				return this.host2;			
 			case "3":
 				return this.host3;
 			case "4":
@@ -91,7 +87,22 @@ public class JPanelShowInformation extends JPanel implements Runnable{
 		} catch (InterruptedException e){
 			System.out.println(e.getMessage());
 		}
-		this.txtArea.append("Se debe mostrar la informaciónde :"+this.getNodeShow()+"\n");
+		if(this.myIp.getMyIp().equals(this.serverData)){
+			this.runShell = new RunShell("cat serverData.txt");
+			String[] aux = new String[200];
+			aux = this.runShell.getInformation(this.getNodeShow());
+			int size = aux.length;
+			this.txtArea.setText(null);
+			for (int i=0; i<size; i++){
+				if(aux[i] != null){
+					this.txtArea.append(aux[i]+"\n");					
+				}
+			}
+	//		this.txtArea.append("Se debe mostrar la información de :"+this.getNodeShow()+" y el servidor soy yo. \n");
+		} else {
+			//debe hacerse la lectura remota (pendiente)			
+			this.txtArea.append("Se debe mostrar la información de :"+this.getNodeShow()+" y debo conectarme al servidor: "+this.serverData+"\n");
+		}
 	}
 	}
 }
