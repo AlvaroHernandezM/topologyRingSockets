@@ -3,24 +3,24 @@ package logic;
 import java.io.*;
 import java.util.*;
 
-public class RunShell {
+public class RunShell implements Runnable{
 
 	private Process p;
 	private String command;
 	private String[] answerCommand;
 	private BufferedReader reader;
 
-	public RunShell(){
-		this.command = "";
+	public RunShell(String command){
+		this.command = command;
+		//System.out.println("voy a ejectura: "+command);
 		this.answerCommand = new String[200];
-		this.p = null;
 	}
 
-	public void runProcess(String command){
-		this.command = command;
-		System.out.println("voy a ejectura: "+command);
+	public void runProcess(){
+		
 		//Ejectura un commando y espera que haya resultado bien
 		try{
+		System.out.println("Se va a ejectura el proceso"+this.command);
 		this.p = Runtime.getRuntime().exec(this.command);
 		System.out.println("esperando por el comando");
 		this.p.waitFor();
@@ -35,7 +35,7 @@ public class RunShell {
 		String line = "";
 		int count = 0;
 		try{
-			while((line = reader.readLine()) != null){
+			while((line = this.reader.readLine()) != null){
 				this.answerCommand[count] = line;
 				count += 1;
 			}
@@ -47,7 +47,7 @@ public class RunShell {
 	}
 
 	public String[] getInformation(String host){
-		this.runProcess("cat serverData.txt");
+		this.runProcess();
 		String[] auxLines = new String[200];
 		String[] messages = new String[200];
 		auxLines = this.getLines();
@@ -88,4 +88,9 @@ public class RunShell {
                 }
 		return messages;
 	}*/
+
+	@Override
+	public void run(){
+		 this.runProcess();
+	}
 }

@@ -11,7 +11,6 @@ public class MainApp{
 		String host = args[0];
 		boolean isServerData = args[1].equals("true") ? true : false;
 		Node node = new Node(6776,6776,host,isServerData);
-		RunShell shell = new RunShell();
 		while(true){
 				if(node.isListenServer() && node.isConnectClient()){
 					node.setFlag(true);

@@ -7,7 +7,7 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
-public class ConexionSSH{
+public class ConexionSSH implements Runnable{
 
 	private String host;
 	private int port;
@@ -47,7 +47,7 @@ public class ConexionSSH{
             this.session.setPassword(this.password);
             this.session.setConfig(this.config);
             this.session.connect();
-            //System.out.println("Connected");
+            System.out.println("Connected");
 	    } catch (Exception e){
 		System.out.println(e.getMessage());
 	    }
@@ -153,5 +153,10 @@ public class ConexionSSH{
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public void run(){
+		 this.executeCommand();
 	}
 }

@@ -11,7 +11,7 @@ public class JPanelConfigurationTopology extends JPanel{
 
 	private	JPanel jPanelConfigurationNode;
 	private JPanelJTextField textFieldNode1, textFieldNode2, textFieldNode3, textFieldNode4, textFieldUser1, textFieldUser2, textFieldUser3, textFieldUser4;
-	private JPanelJComboBox jPanelJComboBoxNode,jPanelJComboBoxNodeShow;
+	private JPanelJComboBox jPanelJComboBoxNode; //,jPanelJComboBoxNodeShow;
 	private JButton btnAccept;
 	private ActionListenerApp actionListenerApp;
 
@@ -25,10 +25,10 @@ public class JPanelConfigurationTopology extends JPanel{
 	this.jPanelConfigurationNode.setBackground(Color.WHITE);
 	this.jPanelConfigurationNode.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-	this.setLayout(new GridLayout(1, 2));
+	this.setLayout(new GridLayout(1, 1));
 	this.setBackground(Color.WHITE);
 
-	this.textFieldNode1 = new JPanelJTextField(300,50,100,"IP NODO 1","192.168.0.25");
+	this.textFieldNode1 = new JPanelJTextField(300,50,100,"IP NODO 1","192.168.0.26");
 	this.textFieldNode1.setOpaque(false);
 	this.jPanelConfigurationNode.add(this.textFieldNode1);
 
@@ -45,11 +45,11 @@ public class JPanelConfigurationTopology extends JPanel{
 	this.jPanelConfigurationNode.add(this.textFieldUser2);
 
 
-	this.textFieldNode3 = new JPanelJTextField(300,250,100,"IP NODO 3","192.168.0.16");
+	this.textFieldNode3 = new JPanelJTextField(300,250,100,"IP NODO 3","192.168.0.28");
     this.textFieldNode3.setOpaque(false);
     this.jPanelConfigurationNode.add(this.textFieldNode3);
 
-    this.textFieldUser3 = new JPanelJTextField(420,250,100,"USER NODO 3", "arhm-server-2");
+    this.textFieldUser3 = new JPanelJTextField(420,250,100,"USER NODO 3", "arhm-server-3");
 	this.textFieldUser3.setOpaque(false);
 	this.jPanelConfigurationNode.add(this.textFieldUser3);
 
@@ -62,14 +62,14 @@ public class JPanelConfigurationTopology extends JPanel{
 	this.textFieldUser4.setOpaque(false);
 	this.jPanelConfigurationNode.add(this.textFieldUser4);
 
-	this.jPanelJComboBoxNode = new JPanelJComboBox(10,400,"Servidor de datos");
+	this.jPanelJComboBoxNode = new JPanelJComboBox(250,400,"Servidor de datos");
 	this.jPanelJComboBoxNode.setOpaque(false);
 	this.jPanelConfigurationNode.add(this.jPanelJComboBoxNode);
-
+/*
 	this.jPanelJComboBoxNodeShow = new JPanelJComboBox(500,400,"Mostrar información inicialmente");
 	this.jPanelJComboBoxNodeShow.setOpaque(false);
 	this.jPanelConfigurationNode.add(this.jPanelJComboBoxNodeShow);
-
+*/
 	this.btnAccept = new JButton("CONTINUAR");
 	this.btnAccept.setBackground(Color.WHITE);
 	this.btnAccept.setBounds(350, 550, 150, 50);
@@ -127,6 +127,7 @@ public class JPanelConfigurationTopology extends JPanel{
 		}
 		return null;
 	}
+	/*
 	public String getNodeShow(){
 		String command =this.jPanelJComboBoxNodeShow.getValue();
 		switch(command){
@@ -144,5 +145,5 @@ public class JPanelConfigurationTopology extends JPanel{
 			break;
 		}
 		return null;
-	}
+	}*/
 }
